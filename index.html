@@ -181,6 +181,47 @@ h2 {
   margin-bottom:1rem;
 }
 
+.tarifas-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.tarifa-bloque {
+  background: #f7f2ec;
+  border-left: 5px solid #a87232;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarifa-bloque:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.tarifa-bloque h3 {
+  color: #a87232;
+  margin-bottom: 0.8rem;
+}
+
+.tarifa-bloque p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.tarifa-bloque .destacado {
+  font-weight: 700;
+  color: #8f5d25;
+  margin-bottom: 1rem;
+}
+
+
 /* GALERÍA DÍA DE CAMPO */
 .galeria {
   margin-top:2rem;
@@ -316,32 +357,30 @@ niños, cabalgata, almuerzo y merienda.</p>
      <!-- ALQUILER QUINCHO -->
        <div class="card"> <h3> Quincho y Fogón</h3> <p><strong>Duración:</strong> hasta 8 horas (a convenir)</p> <p><strong>Incluye:</strong></p> <ul> <li>Uso de quincho cerrado, parrilla y fogón exterior.</li> <li>Capacidad hasta 20 personas.</li> <li>No incluye vajilla (los residuos deben retirarse).</li> <li>Opción adicional: cabalgata de 40 min por el estuario .</li> </ul>  <a href="#contacto" class="btn">Consultar disponibilidad</a> </div> </div>
     
-    <!-- NUEVAS TARIFAS SIN CARDS -->
-  <div class="tarifas-extra">
+    <!-- NUEVAS TARIFAS MEJORADAS -->
+<div class="tarifas-extra">
+  
+  <div class="tarifa-bloque">
     <h3>Grupos Grandes y Eventos</h3>
     <p><strong>Duración:</strong> a convenir según la actividad.</p>
-    <br><strong>Descuentos especiales a partir de 15 personas.</strong>
+    <p class="destacado">Descuentos especiales a partir de 15 personas.</p>
     <p>
       Ideal para contingentes, instituciones, escuelas, grupos familiares o corporativos. 
-      Armamos tu dia segun tus interes y o necesidades, podras optar por almuerzo tipico, merienda, recorrido guiado por las actividades rurales, demostración de esquila, pesca, cabalgata y juegos campestres.
-      
-      
+      Armamos tu día según tus intereses y necesidades. Podrás optar por: almuerzo típico, merienda, recorrido guiado por actividades rurales, demostración de esquila, pesca, cabalgata y juegos campestres.
     </p>
+  </div>
 
+  <div class="tarifa-bloque">
     <h3>Experiencia Rancho Alegre + KAWO Apart Hotel</h3>
-
-    
     <p><strong>Duración:</strong> 2 días / 1 noche.</p>
     <p>
       Disfrutá una escapada completa alojándote en <strong>KAWO Apart Hotel (Puerto Santa Cruz)</strong> y viviendo un
-      <em>Día de Campo</em> en la Estancia Rancho Alegre.  Ideal para parejas o fines de semana de descanso total.
+      <em>Día de Campo</em> en la Estancia Rancho Alegre. Ideal para parejas o fines de semana de descanso total.
     </p>
   </div>
-</section>
 
-    
-    
-    </section>
+</div>
+
 
 
 
@@ -359,6 +398,7 @@ niños, cabalgata, almuerzo y merienda.</p>
     <img src="images/dia6.jpeg" alt="Parque y museo abierto">
     <img src="images/dia7.jpeg" alt="Cabalgata por el estuario">
     <img src="images/dia8.jpeg" alt="Tarde en el parque">
+    <img src="images/dia9.jpeg">
   </div>
 </section>
 
