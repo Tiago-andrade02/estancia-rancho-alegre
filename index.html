@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estancia Rancho Alegre | Turismo Rural</title>
+
+<!-- Fuentes elegantes -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* GENERAL */
+* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  color:#333;
+  background-color:#fdfaf6;
+}
+
+/* NAVBAR */
+nav {
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  background:rgba(59,43,26,0.95);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0.8rem 10%;
+  z-index:1000;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+nav .logo-container {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+nav .logo-container img {
+  height:40px;
+  width:auto;
+}
+nav .logo {
+  font-family:'Playfair Display', serif;
+  font-size:1.5rem;
+  color:white;
+  letter-spacing:1px;
+}
+nav ul {
+  list-style:none;
+  display:flex;
+  gap:1.5rem;
+}
+nav ul li a {
+  text-decoration:none;
+  color:white;
+  font-weight:600;
+  transition:color 0.3s;
+}
+nav ul li a:hover { color:#d3a15d; }
+
+/* HERO CON CARRUSEL */
+.hero {
+  position: relative;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+}
+
+.hero .carousel img {
+  position: absolute;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero .carousel img.active { opacity:1; }
+
+.hero::after {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.4);
+  z-index:1;
+}
+
+.hero-text {
+  position: relative;
+  z-index:2;
+  padding:0 1rem;
+}
+
+.hero-text h1 {
+  font-family:'Playfair Display', serif;
+  font-size:4rem;
+  letter-spacing:1px;
+}
+
+.hero-text p {
+  font-size:1.5rem;
+  margin-top:1rem;
+  font-family:'Lato', sans-serif;
+  opacity:0;
+  animation: fadeText 1s forwards;
+}
+
+@keyframes fadeText {
+  from { opacity:0; transform: translateY(10px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* BOTÓN */
+.btn {
+  display:inline-block;
+  margin-top:2rem;
+  padding:0.8rem 1.6rem;
+  background:#a87232;
+  color:white;
+  text-decoration:none;
+  border-radius:30px;
+  font-weight:600;
+  transition:background 0.3s ease;
+}
+.btn:hover { background:#8f5d25; }
+
+/* SECCIONES */
+section {
+  padding:5rem 10%;
+  text-align:center;
+}
+section:nth-child(even) { background:#fff; }
+section:nth-child(odd) { background:#f7f2ec; }
+
+h2 {
+  font-family:'Playfair Display', serif;
+  font-size:2.5rem;
+  color:#a87232;
+  margin-bottom:1.5rem;
+}
+
+/* TARIFAS */
+.tarifas-cards {
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem;
+  justify-content:center;
+  margin-top:2rem;
+}
+
+.tarifas-cards .card {
+  background:#fff;
+  padding:2rem;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  width:300px;
+  text-align:left;
+}
+
+.tarifas-cards .card h3 {
+  font-family:'Playfair Display', serif;
+  color:#a87232;
+  margin-bottom:1rem;
+}
+
+.tarifas-cards .card ul {
+  margin-left:1rem;
+  margin-bottom:1rem;
+  line-height:1.6;
+}
+
+.tarifas-cards .card .precio {
+  font-weight:700;
+  color:#a87232;
+  margin-bottom:1rem;
+}
+
+/* GALERÍA DÍA DE CAMPO */
+.galeria {
+  margin-top:2rem;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap:1rem;
+}
+
+.galeria img {
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  cursor:pointer;
+}
+
+.galeria img:hover {
+  transform:scale(1.05);
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* LIGHTBOX */
+#lightbox {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+#lightbox img {
+  max-width:90%;
+  max-height:85%;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+#lightbox span {
+  position:absolute;
+  top:20px;
+  right:40px;
+  color:white;
+  font-size:2.5rem;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* CONTACTO */
+.contacto-info {
+  font-size:1.2rem;
+  line-height:2;
+}
+.contacto-info a {
+  color:#a87232;
+  text-decoration:none;
+  font-weight:600;
+}
+.contacto-info a:hover { text-decoration:underline; }
+
+/* FOOTER */
+footer {
+  background:#3b2b1a;
+  color:white;
+  text-align:center;
+  padding:2rem;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+  nav ul { display:none; }
+  .hero-text h1 { font-size:2.5rem; }
+  .hero-text p { font-size:1rem; }
+  section { padding:3rem 5%; }
+  .tarifas-cards { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo-container">
+    <img src="images/logo.jpeg" alt="Logo Rancho Alegre">
+    <div class="logo">Estancia Rancho Alegre</div>
+  </div>
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+    <li><a href="#actividades">Actividades</a></li>
+    <li><a href="#dia-de-campo">Día de Campo</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO CON CARRUSEL -->
+<section class="hero" id="inicio">
+  <div class="carousel">
+    <img src="images/hero1.jpeg" class="active" alt="Paisaje del campo">
+    <img src="images/hero2.jpeg" alt="Caballos en el campo">
+    <img src="images/hero3.jpeg" alt="Atardecer en la estancia">
+  </div>
+  <div class="hero-text">
+    <h1>Estancia Rancho Alegre</h1>
+    <p>Vení a disfrutar la naturaleza</p>
+    <a href="#actividades" class="btn">Conocé nuestras actividades</a>
+  </div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section id="sobre-nosotros">
+  <h2>Sobre Nosotros</h2>
+  <p>Estancia “RANCHO ALEGRE”, está ubicada a 12 km de la Capital Histórica de
+Santa Cruz, en las orillas del estuario del río Santa Cruz.
+Te invitamos a disfrutar de distintas opciones, en donde en contacto con la
+naturaleza y todos los animales del campo, podrás vivenciar actividades rurales, con
+una extraordinaria vista de nuestro paisaje. Somos una familia que produce
+alimentos naturales para abastecimiento propio, y de la ciudad de Puerto Santa
+Cruz.
+Podrás disfrutar de senderismo guiado, visita plantel de gallinas y pavos libres,
+demostración de esquila, museo abierto, parque con cancha de futbol y juegos para
+niños, cabalgata, almuerzo y merienda.</p>
+</section>
+
+<!-- ACTIVIDADES / TARIFAS -->
+  <section id="actividades"> <h2>Tarifas y Experiencias</h2> <p class="texto">Elegí la experiencia que mejor se adapte a vos y disfrutá una jornada única en contacto con la naturaleza.</p> <div class="tarifas-cards"> 
+  <!-- DÍA DE CAMPO -->
+    <div class="card"> <h3>Día de Campo</h3> <p><strong>Duración:</strong> 6 horas (12:00 a 18:00 hs)</p> <p><strong>Incluye:</strong></p> <ul> <li>Bienvenida y recorrido por la Estancia.</li> <li>Demostración de esquila a cargo de un gaucho.</li> <li>Avicultura: visita a los planteles de gallinas libres.</li> <li>Senderismo guiado (3 km aprox.) con flora y fauna nativa.</li> <li>Tiempo libre en parque y museo abierto.</li> <li>Almuerzo criollo: empanadas, cordero a la estaca, ensaladas y postre (no incluye bebidas).</li> <li>Merienda en el quincho con tortas fritas, pan casero, pasta frola, scons y más.</li> </ul>  <a href="#contacto" class="btn">Consultar disponibilidad</a> </div>
+    <!-- TARDE DE CAMPO -->
+      <div class="card"> <h3>Tarde de Campo</h3> <p><strong>Duración:</strong> 4 horas (14:00 a 18:00 hs)</p> <p><strong>Incluye:</strong></p> <ul> <li>Bienvenida y recorrido por la Estancia.</li> <li>Demostración de esquila y visita a gallinas libres.</li> <li>Senderismo guiado (3 km aprox.).</li> <li>Tiempo libre en parque y museo abierto.</li> <li>Merienda en quincho cerrado: <ul> <li><em>Opción 1:</em> Té, mate cocido, leche, mate y tortas fritas.</li> <li><em>Opción 2:</em> Té, café, pan casero, pasta frola, scons, alfajores, tortas fritas y budín.</li> </ul> </li> </ul> <a href="#contacto" class="btn">Consultar disponibilidad</a> </div> 
+     <!-- ALQUILER QUINCHO -->
+       <div class="card"> <h3> Quincho y Fogón</h3> <p><strong>Duración:</strong> hasta 8 horas (a convenir)</p> <p><strong>Incluye:</strong></p> <ul> <li>Uso de quincho cerrado, parrilla y fogón exterior.</li> <li>Capacidad hasta 20 personas.</li> <li>No incluye vajilla (los residuos deben retirarse).</li> <li>Opción adicional: cabalgata de 40 min por el estuario .</li> </ul>  <a href="#contacto" class="btn">Consultar disponibilidad</a> </div> </div>
+    
+    <!-- NUEVAS TARIFAS SIN CARDS -->
+  <div class="tarifas-extra">
+    <h3>Grupos Grandes y Eventos</h3>
+    <p><strong>Duración:</strong> a convenir según la actividad.</p>
+    <br><strong>Descuentos especiales a partir de 15 personas.</strong>
+    <p>
+      Ideal para contingentes, instituciones, escuelas, grupos familiares o corporativos. 
+      Armamos tu dia segun tus interes y o necesidades, podras optar por almuerzo tipico, merienda, recorrido guiado por las actividades rurales, demostración de esquila, pesca, cabalgata y juegos campestres.
+      
+      
+    </p>
+
+    <h3>Experiencia Rancho Alegre + KAWO Apart Hotel</h3>
+
+    
+    <p><strong>Duración:</strong> 2 días / 1 noche.</p>
+    <p>
+      Disfrutá una escapada completa alojándote en <strong>KAWO Apart Hotel (Puerto Santa Cruz)</strong> y viviendo un
+      <em>Día de Campo</em> en la Estancia Rancho Alegre.  Ideal para parejas o fines de semana de descanso total.
+    </p>
+  </div>
+</section>
+
+    
+    
+    </section>
+
+
+
+<!-- DÍA DE CAMPO -->
+<section id="dia-de-campo">
+  <h2>Día de Campo</h2>
+  <p>Viví una experiencia auténtica con nuestras actividades rurales, almuerzos criollos y la calidez del campo patagónico.</p>
+
+  <div class="galeria">
+    <img src="images/dia1.jpeg" alt="Bienvenida en la estancia">
+    <img src="images/dia2.jpeg" alt="Demostración de esquila">
+    <img src="images/dia3.jpeg" alt="Senderismo por el campo">
+    <img src="images/dia4.jpeg" alt="Almuerzo cordero a la estaca">
+    <img src="images/dia5.jpeg" alt="Merienda en el quincho">
+    <img src="images/dia6.jpeg" alt="Parque y museo abierto">
+    <img src="images/dia7.jpeg" alt="Cabalgata por el estuario">
+    <img src="images/dia8.jpeg" alt="Tarde en el parque">
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <span id="cerrar">&times;</span>
+  <img src="" alt="Imagen ampliada">
+</div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <h2>Contacto</h2>
+  <div class="contacto-info">
+    <p><strong>Contacto:</strong> Ana Laura Manera</p>
+    <p><strong>Celular:</strong> <a href="tel:+540296215406542">02962-15406542</a></p>
+    <p><strong>Instagram:</strong> <a href="https://www.instagram.com/estanciaranchoalegre" target="_blank">@estanciaranchoalegre</a></p>
+    <p><strong>Facebook:</strong> <a href="https://www.facebook.com/estanciaranchoalegre" target="_blank">facebook.com/estanciaranchoalegre</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Estancia Rancho Alegre | Turismo Rural</p>
+</footer>
+
+<script>
+// Frases dinámicas del HERO
+const frases = [
+  "Vení a disfrutar la naturaleza",
+  "Viví la experiencia del campo",
+  "Descubrí la tradición rural"
+];
+let index = 0;
+const heroP = document.querySelector('.hero-text p');
+
+setInterval(() => {
+  index = (index + 1) % frases.length;
+  heroP.style.animation = "none";
+  void heroP.offsetWidth;
+  heroP.textContent = frases[index];
+  heroP.style.animation = "fadeText 1s forwards";
+}, 3500);
+
+// Carrusel
+const slides = document.querySelectorAll('.hero .carousel img');
+let current = 0;
+setInterval(() => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}, 5000);
+
+// Lightbox
+const galeria = document.querySelectorAll('.galeria img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+const cerrar = document.getElementById('cerrar');
+
+galeria.forEach(img => {
+  img.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+  });
+});
+cerrar.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) lightbox.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
+
